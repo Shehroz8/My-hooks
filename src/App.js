@@ -1,23 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState } from 'react';
+import { usePrevious } from './hook/usePrevious';
+import { useLocalStorage } from './hook/useLocalStorage';
 
 function App() {
+  const [count, setCount] = useLocalStorage(0, 'count');
+  const prevCount = usePrevious(count);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>usePrevious</h1>
+      <p>Current: {count}</p>
+      <p>Previous: {count}</p>
+      <button onClick={()=>setCount(count + 1)}>click</button>
     </div>
   );
 }
